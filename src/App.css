@@ -10,8 +10,8 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 262 83.3% 57.8%; /* Modern purple color for gaming theme */
+    --primary-foreground: 210 40% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -28,7 +28,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -54,7 +54,7 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -64,5 +64,56 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+/* Additional gaming-themed utility classes */
+@layer utilities {
+  .glow-red {
+    box-shadow: 0 0 20px rgba(255, 61, 61, 0.3);
+  }
+  
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(74, 95, 255, 0.3);
+  }
+  
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+  }
+  
+  .gradient-gaming {
+    background: linear-gradient(135deg, #0A0E27 0%, #060816 100%);
+  }
+  
+  .gradient-accent {
+    background: linear-gradient(135deg, #FF3D3D 0%, #FF6B35 100%);
+  }
+  
+  /* Gradient text utilities for gaming theme */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-hero {
+    @apply bg-gradient-to-r from-white via-blue-200 to-red-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-gaming {
+    @apply bg-gradient-to-r from-blue-400 via-white to-red-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-fire {
+    @apply bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-cool {
+    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-subtle {
+    @apply bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-neon {
+    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent;
   }
 }
