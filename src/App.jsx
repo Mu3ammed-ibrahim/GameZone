@@ -1,11 +1,13 @@
 import './App.css'
 import { Button } from './Components/ui/button'
+import Navbar from './Components/Layout/Navbar'
+import Hero from './Sections/Hero'
 function App() {
 
   return (
     <>
-      <Button>Click Me</Button>
-      <Button>Click Me</Button>
+    <Navbar />  
+    <Hero />
     </>
   )
 }
