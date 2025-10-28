@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import Heroimg from "@/assets/Heroimg.jpg";
+import SplitText from "@/Components/SplitText";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
@@ -45,7 +46,7 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 overflow-x-hidden">
       {/* Background Image with subtle overlay */}
       <div className="absolute inset-0 z-0">
         <div
@@ -61,12 +62,26 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div>
-          <h1
+          {/* <h1
             ref={titleRef}
             className="font-poppins text-display-lg md:text-8xl font-bold  text-gradient-hero mb-8 tracking-tight"
           >
             Game Zone
-          </h1>
+          </h1> */}
+
+          <SplitText
+            text="GameZone"
+            className="font-poppins text-display-lg md:text-8xl font-bold  text-gradient-hero mb-8 tracking-tight"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+          />
 
           <div ref={buttonsRef} className="flex gap-4 mb-8">
             <Button

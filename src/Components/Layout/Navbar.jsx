@@ -1,30 +1,31 @@
 import React, { useState } from "react";
+import Logo from "@/assets/Logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed w-full z-50 text-gradient-cool bg-transparent">
+    <header className="fixed w-full z-50 text-gradient-cool bg-black/20 backdrop-blur-md">
       <nav
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="flex items-center h-20">
-          {/* Logo/Brand */}
-          <div className="flex-shrink-0 w-1/4">
+          {/* Logo */}
+          <div className="flex-shrink-0">
             <a
               href="/"
-              className="font-poppins font-semibold text-heading-sm tracking-tight"
+              className="flex items-center"
               aria-label="GameZone Home"
             >
-              GameZone
+              <img src={Logo} alt="GameZone Logo" className="h-12 w-auto" />
             </a>
           </div>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Centered */}
           <nav
-            className="hidden md:flex flex-grow justify-center"
+            className="hidden md:flex flex-1 justify-center"
             aria-label="Desktop navigation"
           >
             <ul className="flex space-x-10" role="menubar">
@@ -59,11 +60,11 @@ const Navbar = () => {
             </ul>
           </nav>
 
-          {/* Empty div for symmetry */}
-          <div className="w-1/4" aria-hidden="true"></div>
+          {/* Spacer for desktop symmetry - hidden on mobile */}
+          <div className="hidden md:block flex-shrink-0 w-12"></div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden ml-auto">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50 transition-colors"
@@ -76,14 +77,8 @@ const Navbar = () => {
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
-                <svg
-                  className="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                />
                 {isMenuOpen ? (
                   <path
                     strokeLinecap="round"
@@ -108,11 +103,11 @@ const Navbar = () => {
         {isMenuOpen && (
           <nav
             id="mobile-menu"
-            className="md:hidden absolute top-full left-0 w-full bg-black/60 backdrop-blur-sm"
+            className="md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-lg border-t border-white/10"
             aria-label="Mobile navigation"
           >
             <ul
-              className="px-2 pt-4 pb-3 space-y-2 sm:px-3 max-w-7xl mx-auto"
+              className="px-4 pt-4 pb-6 space-y-1 max-w-7xl mx-auto"
               role="menu"
             >
               <li role="none">
@@ -121,6 +116,7 @@ const Navbar = () => {
                   className="font-roboto text-body-md hover:bg-white/10 px-4 py-3 rounded-md transition-colors block"
                   role="menuitem"
                   aria-current="page"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Home
                 </a>
@@ -130,6 +126,7 @@ const Navbar = () => {
                   href="/about"
                   className="font-roboto text-body-md hover:bg-white/10 px-4 py-3 rounded-md transition-colors block"
                   role="menuitem"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   About
                 </a>
@@ -139,6 +136,7 @@ const Navbar = () => {
                   href="/contact"
                   className="font-roboto text-body-md hover:bg-white/10 px-4 py-3 rounded-md transition-colors block"
                   role="menuitem"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
                 </a>
