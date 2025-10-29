@@ -78,6 +78,25 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      keyframes: {
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-20px) scale(1.05)" },
+        },
+        "float-medium": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-30px) rotate(2deg)" },
+        },
+        "float-fast": {
+          "0%, 100%": { transform: "translateY(0) translateX(0)" },
+          "50%": { transform: "translateY(-15px) translateX(10px)" },
+        },
+      },
+      animation: {
+        "float-slow": "float-slow 8s ease-in-out infinite",
+        "float-medium": "float-medium 6s ease-in-out infinite",
+        "float-fast": "float-fast 5s ease-in-out infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
