@@ -4,6 +4,7 @@ import Navbar from "./Components/Layout/Navbar";
 import Footer from "./Components/Layout/Footer";
 import Hero from "./Sections/Hero";
 import Features from "./Sections/Features";
+import CustomersSay from "./Sections/CustomersSay";
 import TopSelling from "./Sections/TopSelling";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Features />
       <TopSelling />
+      <CustomersSay />
       <Footer />
     </>
   );
