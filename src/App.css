@@ -65,7 +65,10 @@
   body {
     @apply bg-background text-foreground;
   }
-  html,
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
   body {
     overflow-x: hidden;
   }
@@ -96,31 +99,24 @@
   }
 
   /* Gradient text utilities for gaming theme */
-  .text-gradient-primary {
-    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+
+  /* Main Heading Gradient - Vibrant neon gaming theme */
+  .text-gradient-neon {
+    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent;
   }
 
-  .text-gradient-hero {
-    @apply bg-gradient-to-r from-white via-blue-200 to-red-400 bg-clip-text text-transparent;
-  }
-
+  /* Gaming Accent Gradient - Patriotic gaming colors */
   .text-gradient-gaming {
     @apply bg-gradient-to-r from-blue-400 via-white to-red-400 bg-clip-text text-transparent;
   }
 
+  /* Fire/Price Gradient - Warm attention-grabbing colors */
   .text-gradient-fire {
     @apply bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent;
   }
 
-  .text-gradient-cool {
-    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent;
-  }
-
+  /* Subtle Text Gradient - For subheadings and body text */
   .text-gradient-subtle {
     @apply bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent;
-  }
-
-  .text-gradient-neon {
-    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent;
   }
 }

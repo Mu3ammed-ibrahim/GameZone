@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "@/assets/Logo.png";
 
 const Footer = () => {
@@ -81,42 +80,42 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/"
-                  className="text-sm hover:text-white transition-colors"
+                  href="#hero"
+                  className="text-sm hover:text-white transition-colors cursor-pointer"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  href="/about"
-                  className="text-sm hover:text-white transition-colors"
+                  href="#features"
+                  className="text-sm hover:text-white transition-colors cursor-pointer"
                 >
-                  About Us
+                  Features
                 </a>
               </li>
               <li>
                 <a
-                  href="/games"
-                  className="text-sm hover:text-white transition-colors"
+                  href="#games"
+                  className="text-sm hover:text-white transition-colors cursor-pointer"
                 >
                   Games
                 </a>
               </li>
               <li>
                 <a
-                  href="/accessories"
-                  className="text-sm hover:text-white transition-colors"
+                  href="#accessories"
+                  className="text-sm hover:text-white transition-colors cursor-pointer"
                 >
                   Accessories
                 </a>
               </li>
               <li>
                 <a
-                  href="/contact"
-                  className="text-sm hover:text-white transition-colors"
+                  href="#testimonials"
+                  className="text-sm hover:text-white transition-colors cursor-pointer"
                 >
-                  Contact
+                  Testimonials
                 </a>
               </li>
             </ul>

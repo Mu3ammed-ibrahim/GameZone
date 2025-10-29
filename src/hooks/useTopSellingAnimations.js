@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Custom hook for TopSelling section animations
  * Handles heading animation, card stagger animations, and hover effects with GSAP
- * 
+ *
  * @returns {Object} - Object containing refs for animated elements
  */
 export const useTopSellingAnimations = () => {
@@ -58,7 +58,8 @@ export const useTopSellingAnimations = () => {
         });
       }
 
-      // Hover effect for each card
+      // Hover effect for each card with cleanup
+      const eventListeners = [];
       validCards.forEach((card) => {
         if (card) {
           const handleMouseEnter = () => {
@@ -79,8 +80,19 @@ export const useTopSellingAnimations = () => {
 
           card.addEventListener("mouseenter", handleMouseEnter);
           card.addEventListener("mouseleave", handleMouseLeave);
+          eventListeners.push({ card, handleMouseEnter, handleMouseLeave });
         }
       });
+
+      // Cleanup function for event listeners
+      return () => {
+        eventListeners.forEach(
+          ({ card, handleMouseEnter, handleMouseLeave }) => {
+            card.removeEventListener("mouseenter", handleMouseEnter);
+            card.removeEventListener("mouseleave", handleMouseLeave);
+          }
+        );
+      };
     }, sectionRef);
 
     return () => ctx.revert();
@@ -92,4 +104,3 @@ export const useTopSellingAnimations = () => {
     cardsRef,
   };
 };
-

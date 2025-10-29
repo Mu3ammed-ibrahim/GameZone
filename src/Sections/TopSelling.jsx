@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Button } from "@/Components/ui/button";
 import CallOfDuty from "@/assets/Games/Call Of Duty.jpg";
 import Eldenring from "@/assets/Games/Eldenring.webp";
@@ -8,43 +9,48 @@ import { useTopSellingAnimations } from "@/hooks/useTopSellingAnimations";
 const TopSelling = () => {
   const { sectionRef, headingRef, cardsRef } = useTopSellingAnimations();
 
-  const games = [
-    {
-      title: "Call of Duty",
-      description:
-        "Experience the ultimate first-person shooter with intense multiplayer action and gripping storylines.",
-      price: "$69.99",
-      rating: "4.8",
-      image: CallOfDuty,
-    },
-    {
-      title: "Elden Ring",
-      description:
-        "Embark on an epic journey through a vast fantasy world filled with danger and discovery.",
-      price: "$59.99",
-      rating: "4.9",
-      image: Eldenring,
-    },
-    {
-      title: "FIFA 25",
-      description:
-        "The world's most popular football game returns with enhanced gameplay and realistic graphics.",
-      price: "$69.99",
-      rating: "4.6",
-      image: Fifa25,
-    },
-    {
-      title: "God of War",
-      description:
-        "Join Kratos on a breathtaking adventure through Norse mythology in this action masterpiece.",
-      price: "$49.99",
-      rating: "4.9",
-      image: GodOfWar,
-    },
-  ];
+  // Memoize games array to prevent unnecessary re-renders
+  const games = useMemo(
+    () => [
+      {
+        title: "Call of Duty",
+        description:
+          "Experience the ultimate first-person shooter with intense multiplayer action and gripping storylines.",
+        price: "$69.99",
+        rating: "4.8",
+        image: CallOfDuty,
+      },
+      {
+        title: "Elden Ring",
+        description:
+          "Embark on an epic journey through a vast fantasy world filled with danger and discovery.",
+        price: "$59.99",
+        rating: "4.9",
+        image: Eldenring,
+      },
+      {
+        title: "FIFA 25",
+        description:
+          "The world's most popular football game returns with enhanced gameplay and realistic graphics.",
+        price: "$69.99",
+        rating: "4.6",
+        image: Fifa25,
+      },
+      {
+        title: "God of War",
+        description:
+          "Join Kratos on a breathtaking adventure through Norse mythology in this action masterpiece.",
+        price: "$49.99",
+        rating: "4.9",
+        image: GodOfWar,
+      },
+    ],
+    []
+  );
 
   return (
     <section
+      id="games"
       ref={sectionRef}
       className="relative py-24 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden"
     >
@@ -54,7 +60,7 @@ const TopSelling = () => {
           <h2 className="text-5xl md:text-6xl font-poppins font-bold text-gradient-neon mb-4">
             Top Selling Games
           </h2>
-          <p className="text-lg text-gradient-subtle max-w-2xl mx-auto">
+          <p className="text-lg font-roboto text-gradient-subtle max-w-2xl mx-auto leading-relaxed">
             Discover our most popular games loved by millions of players
             worldwide
           </p>
@@ -92,22 +98,22 @@ const TopSelling = () => {
 
               {/* Card Content */}
               <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gradient-gaming mb-3">
+                <h3 className="text-2xl font-poppins font-semibold text-gradient-gaming mb-3">
                   {game.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed text-sm mb-4">
+                <p className="text-slate-400 font-roboto leading-relaxed text-sm mb-4">
                   {game.description}
                 </p>
               </div>
 
               {/* Card Footer */}
               <div className="flex justify-between items-center px-6 pb-6">
-                <span className="text-2xl font-bold text-gradient-fire">
+                <span className="text-2xl font-poppins font-bold text-gradient-fire">
                   {game.price}
                 </span>
                 <Button
                   size="sm"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-roboto font-semibold border-0"
                 >
                   Buy Now
                 </Button>
@@ -120,7 +126,7 @@ const TopSelling = () => {
         <div className="text-center mt-12">
           <Button
             size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 border-0"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-roboto font-semibold px-8 border-0"
           >
             View All Games
           </Button>

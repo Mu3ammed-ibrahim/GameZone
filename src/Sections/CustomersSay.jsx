@@ -1,80 +1,86 @@
+import { useMemo } from "react";
 import { useCustomerSayAnimations } from "@/hooks/useCustomerSayAnimations";
 
 const CustomersSay = () => {
   const { sectionRef, headingRef, subheadingRef, cardsRef } =
     useCustomerSayAnimations();
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Alex Chen",
-      role: "Pro Gamer",
-      avatar: "AC",
-      rating: 5,
-      comment:
-        "GameZone has completely transformed my gaming experience! The selection is incredible and the platform is so smooth. Best gaming store I've ever used.",
-      game: "Call of Duty",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      id: 2,
-      name: "Sarah Mitchell",
-      role: "Streamer",
-      avatar: "SM",
-      rating: 5,
-      comment:
-        "As a content creator, I need reliable access to the latest games. GameZone delivers every time with lightning-fast downloads and amazing customer support!",
-      game: "Elden Ring",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      id: 3,
-      name: "Marcus Johnson",
-      role: "Casual Player",
-      avatar: "MJ",
-      rating: 5,
-      comment:
-        "I love how easy it is to find and purchase games here. The recommendations are spot-on, and the deals are fantastic. GameZone is my go-to platform!",
-      game: "FIFA 25",
-      gradient: "from-orange-500 to-red-500",
-    },
-    {
-      id: 4,
-      name: "Emma Rodriguez",
-      role: "RPG Enthusiast",
-      avatar: "ER",
-      rating: 5,
-      comment:
-        "The gaming community here is amazing! I've discovered so many hidden gems through their expert recommendations. GameZone truly understands gamers.",
-      game: "God of War",
-      gradient: "from-green-500 to-teal-500",
-    },
-    {
-      id: 5,
-      name: "David Kim",
-      role: "Competitive Player",
-      avatar: "DK",
-      rating: 5,
-      comment:
-        "Fast, reliable, and packed with features. GameZone's platform is built for serious gamers. The performance is unmatched!",
-      game: "Valorant",
-      gradient: "from-red-500 to-pink-500",
-    },
-    {
-      id: 6,
-      name: "Lisa Wang",
-      role: "Game Collector",
-      avatar: "LW",
-      rating: 5,
-      comment:
-        "I've been collecting games for years, and GameZone has the best catalog. The exclusive deals and early access are incredible!",
-      game: "The Last of Us",
-      gradient: "from-indigo-500 to-purple-500",
-    },
-  ];
+  // Memoize testimonials array to prevent unnecessary re-renders
+  const testimonials = useMemo(
+    () => [
+      {
+        id: 1,
+        name: "Alex Chen",
+        role: "Pro Gamer",
+        avatar: "AC",
+        rating: 5,
+        comment:
+          "GameZone has completely transformed my gaming experience! The selection is incredible and the platform is so smooth. Best gaming store I've ever used.",
+        game: "Call of Duty",
+        gradient: "from-blue-500 to-cyan-500",
+      },
+      {
+        id: 2,
+        name: "Sarah Mitchell",
+        role: "Streamer",
+        avatar: "SM",
+        rating: 5,
+        comment:
+          "As a content creator, I need reliable access to the latest games. GameZone delivers every time with lightning-fast downloads and amazing customer support!",
+        game: "Elden Ring",
+        gradient: "from-purple-500 to-pink-500",
+      },
+      {
+        id: 3,
+        name: "Marcus Johnson",
+        role: "Casual Player",
+        avatar: "MJ",
+        rating: 5,
+        comment:
+          "I love how easy it is to find and purchase games here. The recommendations are spot-on, and the deals are fantastic. GameZone is my go-to platform!",
+        game: "FIFA 25",
+        gradient: "from-orange-500 to-red-500",
+      },
+      {
+        id: 4,
+        name: "Emma Rodriguez",
+        role: "RPG Enthusiast",
+        avatar: "ER",
+        rating: 5,
+        comment:
+          "The gaming community here is amazing! I've discovered so many hidden gems through their expert recommendations. GameZone truly understands gamers.",
+        game: "God of War",
+        gradient: "from-green-500 to-teal-500",
+      },
+      {
+        id: 5,
+        name: "David Kim",
+        role: "Competitive Player",
+        avatar: "DK",
+        rating: 5,
+        comment:
+          "Fast, reliable, and packed with features. GameZone's platform is built for serious gamers. The performance is unmatched!",
+        game: "Valorant",
+        gradient: "from-red-500 to-pink-500",
+      },
+      {
+        id: 6,
+        name: "Lisa Wang",
+        role: "Game Collector",
+        avatar: "LW",
+        rating: 5,
+        comment:
+          "I've been collecting games for years, and GameZone has the best catalog. The exclusive deals and early access are incredible!",
+        game: "The Last of Us",
+        gradient: "from-indigo-500 to-purple-500",
+      },
+    ],
+    []
+  );
 
   return (
     <section
+      id="testimonials"
       ref={sectionRef}
       className="relative py-24 bg-gradient-to-b from-slate-950 to-slate-900 overflow-hidden"
     >
@@ -95,7 +101,7 @@ const CustomersSay = () => {
           </h2>
           <p
             ref={subheadingRef}
-            className="text-base sm:text-lg text-gradient-subtle max-w-2xl mx-auto px-4"
+            className="text-base sm:text-lg font-roboto text-gradient-subtle max-w-2xl mx-auto px-4 leading-relaxed"
           >
             Join thousands of satisfied gamers who trust GameZone for their
             gaming needs
@@ -130,10 +136,10 @@ const CustomersSay = () => {
                       </div>
                       {/* Name and Role */}
                       <div>
-                        <h3 className="text-lg sm:text-xl font-semibold text-white">
+                        <h3 className="text-lg sm:text-xl font-poppins font-semibold text-white">
                           {testimonial.name}
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-400">
+                        <p className="text-xs sm:text-sm font-roboto text-slate-400">
                           {testimonial.role}
                         </p>
                       </div>
@@ -166,7 +172,7 @@ const CustomersSay = () => {
                   </div>
 
                   {/* Comment */}
-                  <p className="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">
+                  <p className="text-slate-300 font-roboto leading-relaxed text-sm sm:text-base mb-4">
                     {testimonial.comment}
                   </p>
 
@@ -192,7 +198,7 @@ const CustomersSay = () => {
                           d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs font-roboto text-slate-400">
                         Playing: {testimonial.game}
                       </span>
                     </div>
@@ -209,20 +215,28 @@ const CustomersSay = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <p className="text-slate-400 mb-4 text-sm sm:text-base">
+          <p className="text-slate-400 font-roboto mb-4 text-sm sm:text-base">
             Join our community of{" "}
-            <span className="text-gradient-gaming font-bold">100,000+</span>{" "}
+            <span className="text-gradient-gaming font-poppins font-bold">
+              100,000+
+            </span>{" "}
             happy gamers
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <div className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full">
-              <span className="text-sm text-slate-300">⭐ 4.9/5 Rating</span>
+              <span className="text-sm font-roboto text-slate-300">
+                ⭐ 4.9/5 Rating
+              </span>
             </div>
             <div className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full">
-              <span className="text-sm text-slate-300">🎮 10M+ Games Sold</span>
+              <span className="text-sm font-roboto text-slate-300">
+                🎮 10M+ Games Sold
+              </span>
             </div>
             <div className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full">
-              <span className="text-sm text-slate-300">🏆 Award Winning</span>
+              <span className="text-sm font-roboto text-slate-300">
+                🏆 Award Winning
+              </span>
             </div>
           </div>
         </div>
