@@ -1,4 +1,4 @@
-// src/Sections/Features.jsx
+import { useMemo } from "react";
 import {
   Card,
   CardContent,
@@ -13,68 +13,31 @@ const Features = () => {
   const { sectionRef, headingRef, subheadingRef, imageRef, cardsRef } =
     useFeatureAnimations();
 
-  const features = [
-    {
-      title: "Immersive Gaming Experience",
-      description:
-        "Dive into worlds of adventure with cutting-edge graphics and seamless gameplay. Our platform brings you the most engaging gaming content.",
-    },
-    {
-      title: "Advanced Technology",
-      description:
-        "Experience next-generation gaming powered by the latest hardware and software innovations designed to elevate your digital experience.",
-    },
-    {
-      title: "Expert Recommendations",
-      description:
-        "Get personalized game suggestions from our expert team. We curate the best titles to match your gaming preferences and style.",
-    },
-  ];
+  // Memoize features array to prevent unnecessary re-renders
+  const features = useMemo(
+    () => [
+      {
+        title: "Immersive Gaming Experience",
+        description:
+          "Dive into worlds of adventure with cutting-edge graphics and seamless gameplay. Our platform brings you the most engaging gaming content.",
+      },
+      {
+        title: "Advanced Technology",
+        description:
+          "Experience next-generation gaming powered by the latest hardware and software innovations designed to elevate your digital experience.",
+      },
+      {
+        title: "Expert Recommendations",
+        description:
+          "Get personalized game suggestions from our expert team. We curate the best titles to match your gaming preferences and style.",
+      },
+    ],
+    []
+  );
 
   return (
-    //     <section className="relative py-24 bg-slate-900">
-    //       <div className="max-w-7xl mx-auto px-6">
-    //         <div ref={featuresRef} className="grid md:grid-cols-2 gap-8 items-start">
-    //           {/* Phone/Game Image */}
-    //           <div className="sticky top-32">
-    //             <div className="relative">
-    //               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-red-600/20 blur-3xl" />
-    //               <img
-    //                 src={GamesImage}
-    //                 alt="Gaming"
-    //                 className="relative z-10 w-full max-w-md mx-auto rounded-3xl shadow-2xl"
-    //               />
-    //             </div>
-    //           </div>
-
-    //           {/* Feature Cards */}
-    //           <div className="space-y-6">
-    //             {features.map((feature, index) => (
-    //               <Card
-    //                 key={index}
-    //                 className="bg-slate-800/50 border-slate-700 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 hover:scale-[1.02] hover:border-red-500/50"
-    //               >
-    //                 <CardHeader>
-    //                   <CardTitle className="text-2xl text-gradient-gaming">
-    //                     {feature.title}
-    //                   </CardTitle>
-    //                 </CardHeader>
-    //                 <CardContent>
-    //                   <CardDescription className="text-base leading-relaxed text-gradient-subtle">
-    //                     {feature.description}
-    //                   </CardDescription>
-    //                 </CardContent>
-    //               </Card>
-    //             ))}
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </section>
-    //   );
-    // };
-
-    // export default Features;
     <section
+      id="features"
       ref={sectionRef}
       className="relative py-24 bg-slate-900 overflow-hidden"
     >
@@ -83,13 +46,13 @@ const Features = () => {
         <div className="text-center mb-16">
           <h2
             ref={headingRef}
-            className="text-5xl md:text-6xl font-poppins mb-4 text-gradient-neon"
+            className="text-5xl md:text-6xl font-poppins font-bold mb-4 text-gradient-neon"
           >
             What We Offer
           </h2>
           <p
             ref={subheadingRef}
-            className="text-lg text-gradient-subtle max-w-2xl mx-auto"
+            className="text-lg font-roboto text-gradient-subtle max-w-2xl mx-auto leading-relaxed"
           >
             Discover the amazing features that make our gaming platform stand
             out from the rest
@@ -118,12 +81,12 @@ const Features = () => {
                 className="bg-slate-800/50 border-slate-700 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 hover:scale-[1.02] hover:border-red-500/50"
               >
                 <CardHeader>
-                  <CardTitle className="card-title text-2xl text-gradient-gaming">
+                  <CardTitle className="card-title text-2xl font-poppins font-semibold text-gradient-gaming">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="card-description text-base leading-relaxed text-gradient-subtle">
+                  <CardDescription className="card-description text-base font-roboto leading-relaxed text-gradient-subtle">
                     {feature.description}
                   </CardDescription>
                 </CardContent>

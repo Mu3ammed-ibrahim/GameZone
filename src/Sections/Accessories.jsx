@@ -7,6 +7,7 @@ const Accessories = () => {
 
   return (
     <section
+      id="accessories"
       ref={sectionRef}
       className="relative py-32 overflow-hidden bg-slate-950"
     >
@@ -24,7 +25,7 @@ const Accessories = () => {
           {/* Subheading */}
           <p
             ref={subheadingRef}
-            className="text-lg sm:text-xl md:text-2xl text-gradient-subtle leading-relaxed mb-10 px-4"
+            className="text-lg sm:text-xl md:text-2xl font-roboto text-gradient-subtle leading-relaxed mb-10 px-4"
           >
             Discover premium gaming accessories and gear designed to enhance
             your performance. From professional-grade headsets to mechanical
@@ -72,37 +73,37 @@ const Accessories = () => {
           {/* Stats/Features */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-4 md:p-6 hover:border-purple-500/50 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-gradient-fire mb-2">
+              <div className="text-3xl md:text-4xl font-poppins font-bold text-gradient-fire mb-2">
                 500+
               </div>
-              <div className="text-xs md:text-sm text-slate-400">
+              <div className="text-xs md:text-sm font-roboto text-slate-400">
                 Premium Products
               </div>
             </div>
 
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-4 md:p-6 hover:border-purple-500/50 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-gradient-gaming mb-2">
+              <div className="text-3xl md:text-4xl font-poppins font-bold text-gradient-gaming mb-2">
                 50+
               </div>
-              <div className="text-xs md:text-sm text-slate-400">
+              <div className="text-xs md:text-sm font-roboto text-slate-400">
                 Top Brands
               </div>
             </div>
 
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-4 md:p-6 hover:border-purple-500/50 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-gradient-neon mb-2">
+              <div className="text-3xl md:text-4xl font-poppins font-bold text-gradient-neon mb-2">
                 24/7
               </div>
-              <div className="text-xs md:text-sm text-slate-400">
+              <div className="text-xs md:text-sm font-roboto text-slate-400">
                 Fast Shipping
               </div>
             </div>
 
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-4 md:p-6 hover:border-purple-500/50 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-gradient-subtle mb-2">
+              <div className="text-3xl md:text-4xl font-poppins font-bold text-gradient-subtle mb-2">
                 100%
               </div>
-              <div className="text-xs md:text-sm text-slate-400">
+              <div className="text-xs md:text-sm font-roboto text-slate-400">
                 Quality Assured
               </div>
             </div>

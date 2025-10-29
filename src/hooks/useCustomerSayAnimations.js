@@ -28,6 +28,7 @@ export const useCustomerSayAnimations = () => {
           },
           opacity: 0,
           y: -50,
+          borderRadius: "10px",
           duration: 1,
           ease: "power3.out",
         });
@@ -74,7 +75,8 @@ export const useCustomerSayAnimations = () => {
           ease: "power3.out",
         });
 
-        // Hover animation for each card
+        // Hover animation for each card with cleanup
+        const eventListeners = [];
         validCards.forEach((card) => {
           if (card) {
             const handleMouseEnter = () => {
@@ -97,8 +99,19 @@ export const useCustomerSayAnimations = () => {
 
             card.addEventListener("mouseenter", handleMouseEnter);
             card.addEventListener("mouseleave", handleMouseLeave);
+            eventListeners.push({ card, handleMouseEnter, handleMouseLeave });
           }
         });
+
+        // Cleanup function for event listeners
+        return () => {
+          eventListeners.forEach(
+            ({ card, handleMouseEnter, handleMouseLeave }) => {
+              card.removeEventListener("mouseenter", handleMouseEnter);
+              card.removeEventListener("mouseleave", handleMouseLeave);
+            }
+          );
+        };
       }
     }, sectionRef);
 
