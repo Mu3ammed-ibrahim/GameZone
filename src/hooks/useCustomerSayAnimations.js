@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Custom hook for CustomersSay section animations
  * Handles heading, subheading, and testimonial card animations with GSAP
+ * Optimized with memoized event handlers and reduced ScrollTrigger instances
  *
  * @returns {Object} - Object containing refs for animated elements
  */
@@ -15,17 +16,26 @@ export const useCustomerSayAnimations = () => {
   const headingRef = useRef(null);
   const subheadingRef = useRef(null);
   const cardsRef = useRef([]);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    // Prevent re-animation if already animated
+    if (hasAnimated.current) return;
+
     const ctx = gsap.context(() => {
+      // Use single timeline for heading and subheading
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
+
       // Heading animation - fade in from top
       if (headingRef.current) {
-        gsap.from(headingRef.current, {
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
+        headerTl.from(headingRef.current, {
           opacity: 0,
           y: -50,
           borderRadius: "10px",
@@ -36,18 +46,16 @@ export const useCustomerSayAnimations = () => {
 
       // Subheading animation - fade in with delay
       if (subheadingRef.current) {
-        gsap.from(subheadingRef.current, {
-          scrollTrigger: {
-            trigger: subheadingRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+        headerTl.from(
+          subheadingRef.current,
+          {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: "power3.out",
           },
-          opacity: 0,
-          y: 30,
-          duration: 1,
-          delay: 0.2,
-          ease: "power3.out",
-        });
+          0.2
+        );
       }
 
       // Testimonial cards stagger animation
@@ -66,6 +74,7 @@ export const useCustomerSayAnimations = () => {
             trigger: validCards[0],
             start: "top 85%",
             toggleActions: "play none none none",
+            once: true,
           },
           opacity: 1,
           y: 0,
@@ -75,26 +84,28 @@ export const useCustomerSayAnimations = () => {
           ease: "power3.out",
         });
 
-        // Hover animation for each card with cleanup
+        // Optimized hover animations using GSAP quickTo for better performance
         const eventListeners = [];
         validCards.forEach((card) => {
           if (card) {
+            // QuickTo methods for instant, performant updates
+            const quickY = gsap.quickTo(card, "y", {
+              duration: 0.3,
+              ease: "power2.out",
+            });
+            const quickScale = gsap.quickTo(card, "scale", {
+              duration: 0.3,
+              ease: "power2.out",
+            });
+
             const handleMouseEnter = () => {
-              gsap.to(card, {
-                y: -8,
-                scale: 1.02,
-                duration: 0.3,
-                ease: "power2.out",
-              });
+              quickY(-8);
+              quickScale(1.02);
             };
 
             const handleMouseLeave = () => {
-              gsap.to(card, {
-                y: 0,
-                scale: 1,
-                duration: 0.3,
-                ease: "power2.out",
-              });
+              quickY(0);
+              quickScale(1);
             };
 
             card.addEventListener("mouseenter", handleMouseEnter);
@@ -104,15 +115,17 @@ export const useCustomerSayAnimations = () => {
         });
 
         // Cleanup function for event listeners
-        return () => {
+        ctx.add(() => {
           eventListeners.forEach(
             ({ card, handleMouseEnter, handleMouseLeave }) => {
               card.removeEventListener("mouseenter", handleMouseEnter);
               card.removeEventListener("mouseleave", handleMouseLeave);
             }
           );
-        };
+        });
       }
+
+      hasAnimated.current = true;
     }, sectionRef);
 
     return () => ctx.revert();

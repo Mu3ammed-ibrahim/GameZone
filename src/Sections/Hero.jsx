@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import { gsap } from "gsap";
 import { Button } from "@/Components/ui/button";
 import Heroimg from "@/assets/Heroimg.jpg";
 import SplitText from "@/Components/SplitText";
 
-const Hero = () => {
+const Hero = memo(() => {
   const buttonsRef = useRef(null);
   const descRef = useRef(null);
 
@@ -128,6 +128,8 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

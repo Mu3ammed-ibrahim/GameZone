@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { Button } from "@/Components/ui/button";
 import Gaming from "@/assets/Accessories/gaming headset.jpg";
 import { useCTAAnimations } from "@/hooks/useCTAAnimations";
 
-const CTA = () => {
+const CTA = memo(() => {
   const {
     sectionRef,
     headingRef,
@@ -194,6 +195,8 @@ const CTA = () => {
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"></div>
     </section>
   );
-};
+});
+
+CTA.displayName = "CTA";
 
 export default CTA;

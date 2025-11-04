@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
@@ -35,6 +35,30 @@ const SplitText = ({
     }
   }, []);
 
+  // Memoize animation properties to prevent unnecessary re-renders
+  const animationProps = useMemo(() => ({
+    from,
+    to,
+    delay,
+    duration,
+    ease,
+  }), [delay, duration, ease, from.opacity, from.y, to.opacity, to.y]);
+
+  // Memoize ScrollTrigger start position calculation
+  const scrollTriggerStart = useMemo(() => {
+    const startPct = (1 - threshold) * 100;
+    const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
+    const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
+    const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
+    const sign =
+      marginValue === 0
+        ? ''
+        : marginValue < 0
+          ? `-=${Math.abs(marginValue)}${marginUnit}`
+          : `+=${marginValue}${marginUnit}`;
+    return `top ${startPct}%${sign}`;
+  }, [threshold, rootMargin]);
+
   useGSAP(() => {
     if (!ref.current || !text || !fontsLoaded) return;
     const el = ref.current;
@@ -47,18 +71,6 @@ const SplitText = ({
       }
       el._rbsplitInstance = null;
     }
-
-    const startPct = (1 - threshold) * 100;
-    const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
-    const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-    const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
-    const sign =
-      marginValue === 0
-        ? ''
-        : marginValue < 0
-          ? `-=${Math.abs(marginValue)}${marginUnit}`
-          : `+=${marginValue}${marginUnit}`;
-    const start = `top ${startPct}%${sign}`;
 
     let targets;
     const assignTargets = self => {
@@ -84,14 +96,14 @@ const SplitText = ({
             target.classList.add('text-secondary');
           });
         }
-        return gsap.fromTo(targets, { ...from }, {
-          ...to,
-          duration,
-          ease,
-          stagger: delay / 1000,
+        return gsap.fromTo(targets, { ...animationProps.from }, {
+          ...animationProps.to,
+          duration: animationProps.duration,
+          ease: animationProps.ease,
+          stagger: animationProps.delay / 1000,
           scrollTrigger: {
             trigger: el,
-            start,
+            start: scrollTriggerStart,
             once: true,
             fastScrollEnd: true,
             anticipatePin: 0.4
@@ -121,15 +133,11 @@ const SplitText = ({
   }, {
     dependencies: [
       text,
-      delay,
-      duration,
-      ease,
       splitType,
-      JSON.stringify(from),
-      JSON.stringify(to),
-      threshold,
-      rootMargin,
+      animationProps,
+      scrollTriggerStart,
       fontsLoaded,
+      className,
       onLetterAnimationComplete
     ],
     scope: ref

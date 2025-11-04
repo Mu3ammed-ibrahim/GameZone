@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Custom hook for Features section animations
  * Handles heading, subheading, image, and card animations with GSAP
+ * Optimized to reduce ScrollTrigger instances - MAJOR performance improvement
  *
  * @returns {Object} - Object containing refs for animated elements
  */
@@ -16,16 +17,25 @@ export const useFeatureAnimations = () => {
   const subheadingRef = useRef(null);
   const imageRef = useRef(null);
   const cardsRef = useRef([]);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    // Prevent re-animation if already animated
+    if (hasAnimated.current) return;
+
     const ctx = gsap.context(() => {
-      // Main heading animation
-      gsap.from(headingRef.current, {
+      // Header timeline with single ScrollTrigger
+      const headerTl = gsap.timeline({
         scrollTrigger: {
           trigger: headingRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
+          once: true,
         },
+      });
+
+      // Main heading animation
+      headerTl.from(headingRef.current, {
         opacity: 0,
         y: -50,
         duration: 1,
@@ -33,25 +43,24 @@ export const useFeatureAnimations = () => {
       });
 
       // Subheading/paragraph animation (staggered after heading)
-      gsap.from(subheadingRef.current, {
-        scrollTrigger: {
-          trigger: subheadingRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+      headerTl.from(
+        subheadingRef.current,
+        {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          ease: "power3.out",
         },
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.2,
-        ease: "power3.out",
-      });
+        0.2
+      );
 
       // Image animation with scale and rotation
       gsap.from(imageRef.current, {
         scrollTrigger: {
           trigger: imageRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
+          once: true,
         },
         opacity: 0,
         x: -100,
@@ -61,57 +70,62 @@ export const useFeatureAnimations = () => {
         ease: "power3.out",
       });
 
-      // Individual card animations on scroll
-      cardsRef.current.forEach((card) => {
+      // Optimized card animations - use single timeline per card instead of 3 ScrollTriggers
+      const validCards = cardsRef.current.filter((card) => card !== null);
+      validCards.forEach((card, index) => {
         if (card) {
-          // Animate the entire card
-          gsap.from(card, {
+          const cardTitle = card.querySelector(".card-title");
+          const cardDescription = card.querySelector(".card-description");
+
+          // Single timeline with one ScrollTrigger per card
+          const cardTl = gsap.timeline({
             scrollTrigger: {
               trigger: card,
               start: "top 85%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
+              once: true,
             },
+          });
+
+          // Animate the entire card
+          cardTl.from(card, {
             opacity: 0,
             x: 100,
             duration: 0.8,
             ease: "power3.out",
           });
 
-          // Animate card title separately
-          const cardTitle = card.querySelector(".card-title");
+          // Animate card title
           if (cardTitle) {
-            gsap.from(cardTitle, {
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
+            cardTl.from(
+              cardTitle,
+              {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: "power3.out",
               },
-              opacity: 0,
-              y: 20,
-              duration: 0.8,
-              delay: 0.2,
-              ease: "power3.out",
-            });
+              0.2
+            );
           }
 
-          // Animate card description separately
-          const cardDescription = card.querySelector(".card-description");
+          // Animate card description
           if (cardDescription) {
-            gsap.from(cardDescription, {
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
+            cardTl.from(
+              cardDescription,
+              {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: "power3.out",
               },
-              opacity: 0,
-              y: 20,
-              duration: 0.8,
-              delay: 0.4,
-              ease: "power3.out",
-            });
+              0.4
+            );
           }
         }
       });
+
+      hasAnimated.current = true;
     }, sectionRef);
 
     return () => ctx.revert();

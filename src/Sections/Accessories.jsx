@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { Button } from "@/Components/ui/button";
 import { useAccessoriesAnimations } from "@/hooks/useAccessoriesAnimations";
 
-const Accessories = () => {
+const Accessories = memo(() => {
   const { sectionRef, headingRef, subheadingRef, buttonRef } =
     useAccessoriesAnimations();
 
@@ -112,6 +113,8 @@ const Accessories = () => {
       </div>
     </section>
   );
-};
+});
+
+Accessories.displayName = 'Accessories';
 
 export default Accessories;

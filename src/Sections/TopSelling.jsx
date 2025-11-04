@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import { Button } from "@/Components/ui/button";
 import CallOfDuty from "@/assets/Games/Call Of Duty.jpg";
 import Eldenring from "@/assets/Games/Eldenring.webp";
@@ -6,7 +6,7 @@ import Fifa25 from "@/assets/Games/Fifa25.webp";
 import GodOfWar from "@/assets/Games/God of War.jpg";
 import { useTopSellingAnimations } from "@/hooks/useTopSellingAnimations";
 
-const TopSelling = () => {
+const TopSelling = memo(() => {
   const { sectionRef, headingRef, cardsRef } = useTopSellingAnimations();
 
   // Memoize games array to prevent unnecessary re-renders
@@ -134,6 +134,8 @@ const TopSelling = () => {
       </div>
     </section>
   );
-};
+});
+
+TopSelling.displayName = 'TopSelling';
 
 export default TopSelling;

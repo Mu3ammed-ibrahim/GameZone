@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
 import GamesImage from "@/assets/Gaming Accessories.png";
 import { useFeatureAnimations } from "@/hooks/useFeatureAnimations";
 
-const Features = () => {
+const Features = memo(() => {
   const { sectionRef, headingRef, subheadingRef, imageRef, cardsRef } =
     useFeatureAnimations();
 
@@ -97,6 +97,8 @@ const Features = () => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
 
 export default Features;

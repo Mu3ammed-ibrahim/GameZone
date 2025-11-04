@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import { useCustomerSayAnimations } from "@/hooks/useCustomerSayAnimations";
 
-const CustomersSay = () => {
+const CustomersSay = memo(() => {
   const { sectionRef, headingRef, subheadingRef, cardsRef } =
     useCustomerSayAnimations();
 
@@ -243,6 +243,8 @@ const CustomersSay = () => {
       </div>
     </section>
   );
-};
+});
+
+CustomersSay.displayName = 'CustomersSay';
 
 export default CustomersSay;
